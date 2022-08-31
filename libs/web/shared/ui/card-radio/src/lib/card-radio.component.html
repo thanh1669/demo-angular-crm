@@ -1,0 +1,46 @@
+<div class="section mb-5">
+    <nz-card
+        class="w-full"
+        [nzSize]="cardSize"
+        [nzTitle]="cardTitle"
+        [nzExtra]="template"
+        nzHoverable
+    >
+        <ng-container *ngIf="!inputTemplate && cardToggle">
+            <cdk-virtual-scroll-viewport
+                itemSize="73"
+                class="w-full h-24"
+            >
+                <nz-radio-group
+                    class="inline-block"
+                    [(ngModel)]="nzModel"
+                    (ngModelChange)="nzCallback.emit($event)"
+                >
+                    <div *ngFor="let item of nzData">
+                        <label
+                            class="h-8"
+                            nz-radio
+                            [nzValue]="item.key"
+                        >
+                            {{ item.title }}
+                        </label>
+                    </div>
+                </nz-radio-group>
+            </cdk-virtual-scroll-viewport>
+        </ng-container>
+    </nz-card>
+    <ng-template #template>
+        <button
+            nz-button
+            nzShape="circle"
+            nzSize="small"
+            class="mr-1 border-none"
+            (click)="cardToggle = !cardToggle"
+        >
+            <i
+                nz-icon
+                [nzType]="cardToggle ? 'down' : 'right'"
+            ></i>
+        </button>
+    </ng-template>
+</div>

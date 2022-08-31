@@ -1,0 +1,27 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/web/shared/ui/dropdown-thead/src",
+    "prefix": "app-crm",
+    "targets": {
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": [
+                "coverage/libs/web/shared/ui/dropdown-thead"
+            ],
+            "options": {
+                "jestConfig": "libs/web/shared/ui/dropdown-thead/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/web/shared/ui/dropdown-thead/**/*.ts",
+                    "libs/web/shared/ui/dropdown-thead/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": []
+}

@@ -1,0 +1,42 @@
+<div class="section mb-5">
+    <nz-card
+        class="w-full"
+        [nzSize]="cardSize"
+        [nzTitle]="cardTitle"
+        [nzExtra]="template"
+        nzHoverable
+    >
+        <ng-container *ngIf="inputTemplate && cardToggle">
+            <ng-template *ngTemplateOutlet="inputTemplate"></ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="!inputTemplate && cardToggle">
+            <cdk-virtual-scroll-viewport
+                itemSize="73"
+                class="w-full h-24"
+            >
+                <nz-tree
+                    nzCheckable
+                    nzMultiple
+                    [nzData]="nzData"
+                    (nzCheckBoxChange)="nzEvent($event)"
+                    [nzCheckedKeys]="nzModel"
+                ></nz-tree>
+            </cdk-virtual-scroll-viewport>
+        </ng-container>
+    </nz-card>
+    <ng-template #template>
+        <button
+            nz-button
+            nzShape="circle"
+            nzSize="small"
+            class="mr-1 border-none"
+            (click)="cardToggle = !cardToggle"
+        >
+            <i
+                nz-icon
+                [nzType]="cardToggle ? 'down' : 'right'"
+            ></i>
+        </button>
+    </ng-template>
+</div>

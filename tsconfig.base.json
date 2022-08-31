@@ -1,0 +1,132 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "lib": [
+            "es2017",
+            "dom"
+        ],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@app-crm/web/auth/data-access/models": [
+                "libs/web/auth/data-access/models/src/index.ts"
+            ],
+            "@app-crm/web/auth/data-access/stores": [
+                "libs/web/auth/data-access/stores/src/index.ts"
+            ],
+            "@app-crm/web/auth/feature/login": [
+                "libs/web/auth/feature/login/src/index.ts"
+            ],
+            "@app-crm/web/partner/data-access/models": [
+                "libs/web/partner/data-access/models/src/index.ts"
+            ],
+            "@app-crm/web/partner/data-access/stores": [
+                "libs/web/partner/data-access/stores/src/index.ts"
+            ],
+            "@app-crm/web/partner/feature/customer": [
+                "libs/web/partner/feature/customer/src/index.ts"
+            ],
+            "@app-crm/web/partner/feature/supplier": [
+                "libs/web/partner/feature/supplier/src/index.ts"
+            ],
+            "@app-crm/web/partner/ui/ui-dropdown-collum": [
+                "libs/web/partner/ui/ui-dropdown-collum/src/index.ts"
+            ],
+            "@app-crm/web/partner/ui/ui-modal-customer-group": [
+                "libs/web/partner/ui/ui-modal-customer-group/src/index.ts"
+            ],
+            "@app-crm/web/partner/ui/ui-modal-download-file": [
+                "libs/web/partner/ui/ui-modal-download-file/src/index.ts"
+            ],
+            "@app-crm/web/partner/ui/ui-modal-upload-file": [
+                "libs/web/partner/ui/ui-modal-upload-file/src/index.ts"
+            ],
+            "@app-crm/web/shared/app-config": [
+                "libs/web/shared/app-config/src/index.ts"
+            ],
+            "@app-crm/web/shared/auth-config": [
+                "libs/web/shared/auth-config/src/index.ts"
+            ],
+            "@app-crm/web/shared/data-access/models": [
+                "libs/web/shared/data-access/models/src/index.ts"
+            ],
+            "@app-crm/web/shared/data-access/services": [
+                "libs/web/shared/data-access/services/src/index.ts"
+            ],
+            "@app-crm/web/shared/data-access/stores": [
+                "libs/web/shared/data-access/stores/src/index.ts"
+            ],
+            "@app-crm/web/shared/dexie-config": [
+                "libs/web/shared/dexie-config/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/button": [
+                "libs/web/shared/ui/button/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/button-upload": [
+                "libs/web/shared/ui/button-upload/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/card-checkbox": [
+                "libs/web/shared/ui/card-checkbox/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/card-input": [
+                "libs/web/shared/ui/card-input/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/card-picker": [
+                "libs/web/shared/ui/card-picker/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/card-radio": [
+                "libs/web/shared/ui/card-radio/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/card-select": [
+                "libs/web/shared/ui/card-select/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/card-table": [
+                "libs/web/shared/ui/card-table/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/dropdown-download": [
+                "libs/web/shared/ui/dropdown-download/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/dropdown-thead": [
+                "libs/web/shared/ui/dropdown-thead/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/dropdown-upload": [
+                "libs/web/shared/ui/dropdown-upload/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/input-number": [
+                "libs/web/shared/ui/input-number/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/input-text": [
+                "libs/web/shared/ui/input-text/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/layout": [
+                "libs/web/shared/ui/layout/src/index.ts"
+            ],
+            "@app-crm/web/shared/ui/ngzoro": [
+                "libs/web/shared/ui/ngzoro/src/index.ts"
+            ],
+            "@app-crm/web/shell/feature": [
+                "libs/web/shell/feature/src/index.ts"
+            ],
+            "@app-crm/web/shell/ui/layout": [
+                "libs/web/shell/ui/layout/src/index.ts"
+            ],
+            "@app-crm/web/shell/ui/nav-bar": [
+                "libs/web/shell/ui/nav-bar/src/index.ts"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "tmp"
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/web/shared/ui/ngzoro/src",
+    "prefix": "app-crm",
+    "targets": {
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": [
+                "coverage/libs/web/shared/ui/ngzoro"
+            ],
+            "options": {
+                "jestConfig": "libs/web/shared/ui/ngzoro/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/web/shared/ui/ngzoro/**/*.ts",
+                    "libs/web/shared/ui/ngzoro/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": []
+}

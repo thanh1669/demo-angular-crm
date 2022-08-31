@@ -1,0 +1,379 @@
+<form
+    nz-form
+    [formGroup]="customerForm"
+    *ngIf="vm$ | async as vm"
+    class="ant-advanced-search-form"
+    autocomplete="off"
+>
+    <div class="grid grid-cols-7 gap-5">
+        <div class="col-span-1 max-sm:col-span-7 ...">
+            <nz-form-item class="mb-4">
+                <ui-button-upload
+                    [nzListType]="'picture-card'"
+                    [nzAction]="'v1/images/upload-single?group=customers'"
+                    [nzFileList]="customerForm.get('avatar')?.value ? [{ uid: 'avatar', name: 'avatar', url: customerForm.get('avatar')?.value }] : []"
+                    [nzShowButton]="customerForm.get('avatar')?.value === null"
+                    (nzCallback)="setAvatarWhenStateChange($event)"
+                >
+                    <!-- Template -->
+                </ui-button-upload>
+            </nz-form-item>
+        </div>
+
+        <div class="col-span-3 max-sm:col-span-7 ...">
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="name"
+                >
+                    <b>Tên khách hàng</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <input
+                        nz-input
+                        placeholder=""
+                        formControlName="name"
+                        [attr.id]="'name'"
+                    />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="phone"
+                >
+                    <b>Số điện thoại</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <input
+                        nz-input
+                        placeholder=""
+                        formControlName="phone"
+                        [attr.id]="'phone'"
+                    />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="birthday"
+                >
+                    <b>Ngày sinh</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <nz-date-picker
+                        size="large"
+                        class="w-full"
+                        nzFormat="dd/MM/yyyy"
+                        formControlName="birthday"
+                        [attr.id]="'birthday'"
+                    ></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="gender"
+                >
+                    <b>Giới tính</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <nz-radio-group
+                        class="inline-block"
+                        formControlName="gender"
+                        [attr.id]="'gender'"
+                    >
+                        <ng-container *ngFor="let item of vm.genders">
+                            <label
+                                class="h-8 mt-1"
+                                nz-radio
+                                [nzValue]="item.key"
+                                *ngIf="item.title !== 'Tất cả'"
+                            >
+                                {{ item.title }}
+                            </label>
+                        </ng-container>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="address"
+                >
+                    <b>Địa chỉ</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <textarea
+                        nz-input
+                        formControlName="address"
+                        [attr.id]="'address'"
+                        [nzAutosize]="{ minRows: 3, maxRows: 6 }"
+                    ></textarea>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="code"
+                >
+                    <b>Tỉnh thành</b>
+                </nz-form-label>
+                <nz-form-control formGroupName="province">
+                    <nz-select
+                        id="code"
+                        formControlName="code"
+                        nzPlaceHolder="Tỉnh thành"
+                        [nzAllowClear]="true"
+                        [nzShowSearch]="true"
+                        [nzLoading]="vm.pageLoading['provinces']"
+                        (nzOpenChange)="getLocationByGroup('province',$event)"
+                        (ngModelChange)="setLocationValueWhenChange('province', $event, vm.provinces)"
+                    >
+                        <nz-option
+                            *ngFor="let option of vm.provinces"
+                            [nzLabel]="option.name"
+                            [nzValue]="option.code"
+                        ></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="code"
+                >
+                    <b>Quận huyện</b>
+                </nz-form-label>
+                <nz-form-control formGroupName="district">
+                    <nz-select
+                        id="code"
+                        formControlName="code"
+                        nzPlaceHolder="Quận huyện"
+                        [nzAllowClear]="true"
+                        [nzShowSearch]="true"
+                        [nzLoading]="vm.pageLoading['districts']"
+                        (nzOpenChange)="getLocationByGroup('district', $event)"
+                        (ngModelChange)="setLocationValueWhenChange('district', $event, vm.districts)"
+                    >
+                        <nz-option
+                            *ngFor="let option of vm.districts"
+                            [nzLabel]="option.name"
+                            [nzValue]="option.code"
+                        ></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="code"
+                >
+                    <b>Phường xã</b>
+                </nz-form-label>
+                <nz-form-control formGroupName="ward">
+                    <nz-select
+                        id="code"
+                        formControlName="code"
+                        nzPlaceHolder="Phường xã"
+                        [nzAllowClear]="true"
+                        [nzShowSearch]="true"
+                        [nzLoading]="vm.pageLoading['wards']"
+                        (nzOpenChange)="getLocationByGroup('ward', $event)"
+                        (ngModelChange)="setLocationValueWhenChange('ward', $event, vm.wards)"
+                    >
+                        <nz-option
+                            *ngFor="let option of vm.wards"
+                            [nzLabel]="option.name"
+                            [nzValue]="option.code"
+                        ></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div class="col-span-3 max-sm:col-span-7 ...">
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="type"
+                >
+                    <b>Loại khách</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <nz-radio-group
+                        class="inline-block"
+                        formControlName="type"
+                        [attr.id]="'type'"
+                    >
+                        <ng-container *ngFor="let item of vm.types">
+                            <label
+                                class="h-8 mt-1"
+                                nz-radio
+                                [nzValue]="item.key"
+                                *ngIf="item.title !== 'Tất cả'"
+                            >
+                                {{ item.title }}
+                            </label>
+                        </ng-container>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="tax_code"
+                >
+                    <b>Mã số thuế</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <input
+                        nz-input
+                        placeholder=""
+                        formControlName="tax_code"
+                        [attr.id]="'tax_code'"
+                    />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="email"
+                >
+                    <b>Email</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <input
+                        nz-input
+                        placeholder=""
+                        formControlName="email"
+                        [attr.id]="'email'"
+                    />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="facebook"
+                >
+                    <b>Facebook</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <input
+                        nz-input
+                        placeholder=""
+                        formControlName="facebook"
+                        [attr.id]="'facebook'"
+                    />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="group"
+                >
+                    <b>Nhóm</b>
+                </nz-form-label>
+                <nz-form-control formGroupName="group">
+                    <nz-select
+                        id="id"
+                        formControlName="id"
+                        nzPlaceHolder="Chọn nhóm"
+                        [nzAllowClear]="true"
+                        [nzShowSearch]="true"
+                        (ngModelChange)="setCustomerGroupValueWhenChange($event, vm.groups)"
+                    >
+                        <nz-option
+                            *ngFor="let option of vm.groups; let i = index"
+                            [nzLabel]="option.name"
+                            [nzValue]="option.id"
+                        ></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item class="mb-4">
+                <nz-form-label
+                    class="w-1/3 text-left"
+                    nzFor="note"
+                >
+                    <b>Ghi chú</b>
+                </nz-form-label>
+                <nz-form-control>
+                    <input
+                        nz-input
+                        placeholder=""
+                        formControlName="note"
+                        [attr.id]="'note'"
+                    />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div
+            nz-col
+            [nzSpan]="24"
+            class="text-right p-2"
+        >
+            <nz-space *ngIf="vm.pageAuthorize['create']">
+                <button
+                    nz-button
+                    *nzSpaceItem
+                    nzSize="large"
+                    [nzType]="'primary'"
+                    [nzLoading]="vm.pageLoading['create']"
+                    (click)="submit(true)"
+                >
+                    <i
+                        nz-icon
+                        nzType="plus"
+                        class="!w-5"
+                    ></i>
+                    Thêm mới
+                </button>
+
+                <button
+                    nz-button
+                    *nzSpaceItem
+                    nzSize="large"
+                    [nzType]="'primary'"
+                    [nzLoading]="vm.pageLoading['create']"
+                    (click)="submit(false)"
+                >
+                    <i
+                        nz-icon
+                        nzType="save"
+                        class="!w-5"
+                    ></i>
+                    Lưu & Thêm mới
+                </button>
+
+                <button
+                    nz-button
+                    *nzSpaceItem
+                    nzSize="large"
+                    (click)="resetForm()"
+                >
+                    <i
+                        nz-icon
+                        nzType="reload"
+                        class="!w-5"
+                    ></i>
+                    Làm mới
+                </button>
+            </nz-space>
+        </div>
+    </div>
+</form>

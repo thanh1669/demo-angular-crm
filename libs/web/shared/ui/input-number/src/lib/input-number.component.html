@@ -1,0 +1,21 @@
+<ng-container>
+    <nz-space
+        nzDirection="vertical"
+        class="w-full"
+    >
+        <nz-input-number
+            class="w-full"
+            [nzStep]="1"
+            [nzMin]="nzMin"
+            [nzMax]="nzMax"
+            [(ngModel)]="nzModel"
+            [nzParser]="nzParser"
+            [nzFormatter]="nzFormatter"
+            [nzPlaceHolder]="nzPlaceHolder"
+            (ngModelChange)="nzCallback.emit(nzModel)"
+            (nzBlur)="nzBlur.emit(nzModel)"
+            (nzFocus)="onFocus()"
+            #element
+        ></nz-input-number>
+    </nz-space>
+</ng-container>

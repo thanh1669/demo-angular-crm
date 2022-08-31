@@ -1,0 +1,18 @@
+<ng-container>
+    <nz-input-group [nzSuffix]="icon">
+        <input
+            nz-input
+            type="text"
+            [(ngModel)]="nzMode"
+            [placeholder]="nzPlaceHolder"
+            (ngModelChange)="nzCallback.emit($event)"
+        />
+    </nz-input-group>
+    <ng-template #icon>
+        <i
+            nz-icon
+            *ngIf="nzIcon"
+            [nzType]="nzIcon"
+        ></i>
+    </ng-template>
+</ng-container>

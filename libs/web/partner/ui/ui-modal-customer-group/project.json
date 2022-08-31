@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/web/partner/ui/ui-modal-customer-group/src",
+  "prefix": "ui",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/partner/ui/ui-modal-customer-group"],
+      "options": {
+        "jestConfig": "libs/web/partner/ui/ui-modal-customer-group/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/partner/ui/ui-modal-customer-group/**/*.ts",
+          "libs/web/partner/ui/ui-modal-customer-group/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

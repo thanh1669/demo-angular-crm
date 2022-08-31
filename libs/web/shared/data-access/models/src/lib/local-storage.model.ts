@@ -1,0 +1,10 @@
+export enum LocalStorageKeys {
+    CURRENT_STORE_ID = 'APP_STORE_ID'
+}
+
+export enum CookieKeys {
+    APP_USER_ID = 'APP_USER_ID',
+    APP_ACCESS_TOKEN = 'APP_ACCESS_TOKEN',
+    APP_TOKEN_EXPIRED = 'APP_TOKEN_EXPIRED',
+    APP_REFRESH_TOKEN = 'APP_REFRESH_TOKEN',
+}

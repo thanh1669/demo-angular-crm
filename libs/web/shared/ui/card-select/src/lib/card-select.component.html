@@ -1,0 +1,65 @@
+<div class="section mb-5">
+    <nz-card
+        class="w-full"
+        [nzSize]="cardSize"
+        [nzTitle]="cardTitle"
+        [nzExtra]="extraTemplate"
+        nzHoverable
+    >
+        <ng-container *ngIf="cardToggle">
+            <nz-select
+                class="w-full"
+                [nzAllowClear]="nzAllowClear"
+                [nzShowSearch]="nzShowSearch"
+                [nzLoading]="nzLoading"
+                [(ngModel)]="nzModel"
+                (ngModelChange)="nzCallback.emit($event)"
+                (nzOnSearch)="searchChange.emit($event)"
+                [nzPlaceHolder]="nzPlaceHolder"
+                name="groups"
+            >
+                <nz-option
+                    *ngFor="let option of nzData"
+                    [nzLabel]="option.title"
+                    [nzValue]="option.key"
+                ></nz-option>
+            </nz-select>
+        </ng-container>
+    </nz-card>
+    <ng-template #extraTemplate>
+        <button
+            nz-button
+            nzSize="small"
+            nzShape="circle"
+            class="mr-1 border-none"
+        >
+            <i
+                nz-icon
+                nzType="info-circle"
+            ></i>
+        </button>
+        <button
+            nz-button
+            nzSize="small"
+            nzShape="circle"
+            class="mr-1 border-none"
+        >
+            <i
+                nz-icon
+                nzType="plus-circle"
+            ></i>
+        </button>
+        <button
+            nz-button
+            nzShape="circle"
+            nzSize="small"
+            class="mr-1 border-none"
+            (click)="cardToggle = !cardToggle"
+        >
+            <i
+                nz-icon
+                [nzType]="cardToggle ? 'down' : 'right'"
+            ></i>
+        </button>
+    </ng-template>
+</div>

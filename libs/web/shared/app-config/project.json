@@ -1,0 +1,27 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/web/shared/app-config/src",
+    "prefix": "app-crm",
+    "targets": {
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": [
+                "coverage/libs/web/shared/app-config"
+            ],
+            "options": {
+                "jestConfig": "libs/web/shared/app-config/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/web/shared/app-config/**/*.ts",
+                    "libs/web/shared/app-config/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": []
+}

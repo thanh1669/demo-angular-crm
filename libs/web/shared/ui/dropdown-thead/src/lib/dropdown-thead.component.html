@@ -1,0 +1,46 @@
+<button
+    nzDanger
+    nz-button
+    nz-dropdown
+    nzSize="large"
+    nzType="primary"
+    nzTrigger="click"
+    [nzDropdownMenu]="menu"
+>
+    <i
+        nz-icon
+        nzType="menu"
+        class="verical"
+    ></i>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+        <nz-checkbox-wrapper
+            nz-menu
+            class="p-2"
+        >
+            <nz-list
+                nzGrid
+                class="w-96"
+            >
+                <div nz-row>
+                    <div
+                        nz-col
+                        [nzSpan]="12"
+                        *ngFor="let collum of nzCollums"
+                    >
+                        <nz-list-item>
+                            <label
+                                nz-checkbox
+                                [nzValue]="collum.key"
+                                [nzChecked]="collum.checked"
+                                [(ngModel)]="collum.checked"
+                                (nzCheckedChange)="onChange(collum)"
+                            >
+                                {{ collum.title }}
+                            </label>
+                        </nz-list-item>
+                    </div>
+                </div>
+            </nz-list>
+        </nz-checkbox-wrapper>
+    </nz-dropdown-menu>
+</button>

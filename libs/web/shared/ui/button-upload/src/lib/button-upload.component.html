@@ -1,0 +1,17 @@
+<nz-upload
+    [nzAction]="apiUrl"
+    [nzListType]="nzListType"
+    [nzFileList]="nzFileList"
+    [nzShowButton]="nzShowButton"
+    (nzChange)="nzCallback.emit($event)"
+>
+    <div>
+        <button
+            nz-button
+            [nzType]="'primary'"
+            class="mt-40"
+        >
+            Chọn ảnh
+        </button>
+    </div>
+</nz-upload>

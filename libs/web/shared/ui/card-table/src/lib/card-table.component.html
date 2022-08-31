@@ -1,0 +1,73 @@
+<nz-table
+    #virtualTable
+    nzShowSizeChanger
+    [nzData]="_data"
+    [nzBordered]="true"
+    [nzFrontPagination]="false"
+    [nzLoading]="nzLoading"
+    [nzSize]="'small'"
+    [nzPageIndex]="1"
+    [nzTotal]="nzTotal"
+    [nzPageSize]="nzPageSize"
+    [nzScroll]="nzScroll ? { y: nzHeight - 250 + 'px', x: (_tableWidth || 0) + 'px' } : {x: null, y: null}"
+    (nzPageIndexChange)="nzIndexChange.emit(($event - 1) * nzPageSize)"
+    (nzPageSizeChange)="nzSizeChange.emit($event)"
+    class="h-full"
+>
+    <thead>
+        <tr>
+            <th
+                [nzWidth]="50 + 'px'"
+                [nzChecked]="_selectedAllValue || false"
+                [nzIndeterminate]="_indeterminated || false"
+                (nzCheckedChange)="setRowSelectedChange('all', $event)"
+            >
+            </th>
+            <th
+                [nzLeft]="head.fixed"
+                [nzSortFn]="head.sorted"
+                [nzWidth]="head.width + 'px'"
+                *ngFor="let head of _collums"
+            >
+                {{ head.title }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template
+            [ngForOf]="virtualTable.data"
+            nz-virtual-scroll
+            let-data
+            ngFor
+        >
+            <tr
+                class="cursor-pointer"
+                (click)="setExpandVisibility(data)"
+            >
+                <td
+                    [nzChecked]="_rowSelected.has(data.id)"
+                    (nzCheckedChange)="setRowSelectedChange(data.id, $event)"
+                >
+                </td>
+                <td
+                    [nzLeft]="head.fixed"
+                    [class]="head.class"
+                    *ngFor="let head of _collums"
+                >
+                    <ng-container *ngIf="head.type === 'string'">
+                        {{ data[head.key] }}
+                    </ng-container>
+
+                    <ng-container *ngIf="head.type === 'number'">
+                        {{ data[head.key] | number }}
+                    </ng-container>
+                </td>
+            </tr>
+            <tr [nzExpand]="data.expand">
+                <ng-container *ngIf="expandTemplate">
+                    <ng-template *ngTemplateOutlet="expandTemplate"></ng-template>
+                </ng-container>
+            </tr>
+        </ng-template>
+    </tbody>
+</nz-table>

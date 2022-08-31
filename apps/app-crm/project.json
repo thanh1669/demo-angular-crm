@@ -1,0 +1,109 @@
+{
+    "projectType": "application",
+    "sourceRoot": "apps/app-crm/src",
+    "prefix": "app-crm",
+    "targets": {
+        "build": {
+            "executor": "@angular-devkit/build-angular:browser",
+            "outputs": [
+                "{options.outputPath}"
+            ],
+            "options": {
+                "outputPath": "dist/apps/app-crm",
+                "index": "apps/app-crm/src/index.html",
+                "main": "apps/app-crm/src/main.ts",
+                "polyfills": "apps/app-crm/src/polyfills.ts",
+                "tsConfig": "apps/app-crm/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                    "apps/app-crm/src/favicon.ico",
+                    "apps/app-crm/src/assets",
+                    "apps/app-crm/src/manifest.webmanifest",
+                    {
+                        "glob": "**/*",
+                        "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                        "output": "/assets/"
+                    }
+                ],
+                "styles": [
+                    "node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css",
+                    "node_modules/ng-zorro-antd/resizable/style/index.min.css",
+                    "apps/app-crm/src/styles.scss"
+                ],
+                "scripts": [],
+                "serviceWorker": true,
+                "ngswConfigPath": "apps/app-crm/ngsw-config.json"
+            },
+            "configurations": {
+                "production": {
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "500kb",
+                            "maximumError": "10mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "2kb",
+                            "maximumError": "4kb"
+                        }
+                    ],
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/app-crm/src/environments/environment.ts",
+                            "with": "apps/app-crm/src/environments/environment.prod.ts"
+                        }
+                    ],
+                    "outputHashing": "all"
+                },
+                "development": {
+                    "buildOptimizer": false,
+                    "optimization": false,
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "namedChunks": true
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "serve": {
+            "executor": "@angular-devkit/build-angular:dev-server",
+            "configurations": {
+                "production": {
+                    "browserTarget": "app-crm:build:production"
+                },
+                "development": {
+                    "browserTarget": "app-crm:build:development"
+                }
+            },
+            "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+            "executor": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+                "browserTarget": "app-crm:build"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "apps/app-crm/**/*.ts",
+                    "apps/app-crm/**/*.html"
+                ]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": [
+                "coverage/apps/app-crm"
+            ],
+            "options": {
+                "jestConfig": "apps/app-crm/jest.config.ts",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}

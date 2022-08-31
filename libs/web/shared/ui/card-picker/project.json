@@ -1,0 +1,27 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/web/shared/ui/card-picker/src",
+    "prefix": "app-crm",
+    "targets": {
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": [
+                "coverage/libs/web/shared/ui/card-picker"
+            ],
+            "options": {
+                "jestConfig": "libs/web/shared/ui/card-picker/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/web/shared/ui/card-picker/**/*.ts",
+                    "libs/web/shared/ui/card-picker/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": []
+}

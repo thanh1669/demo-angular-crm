@@ -1,0 +1,27 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/web/shared/ui/card-checkbox/src",
+    "prefix": "app-crm",
+    "targets": {
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": [
+                "coverage/libs/web/shared/ui/card-checkbox"
+            ],
+            "options": {
+                "jestConfig": "libs/web/shared/ui/card-checkbox/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/web/shared/ui/card-checkbox/**/*.ts",
+                    "libs/web/shared/ui/card-checkbox/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": []
+}

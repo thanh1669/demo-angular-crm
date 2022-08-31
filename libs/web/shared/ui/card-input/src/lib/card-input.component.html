@@ -1,0 +1,64 @@
+<div class="section mb-5">
+    <nz-card
+        class="w-full"
+        [nzSize]="cardSize"
+        [nzTitle]="cardTitle"
+        [nzExtra]="template"
+        nzHoverable
+    >
+        <ng-container *ngIf="inputTemplate && cardToggle">
+            <ng-template *ngTemplateOutlet="inputTemplate"></ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="!inputTemplate && cardToggle">
+            <div
+                class="mb-2"
+                *ngFor="let input of nzData"
+            >
+                <ng-container *ngIf="input.type === 'text'">
+                    <form
+                        nz-form
+                        class="login-form"
+                        (ngSubmit)="onSubmit()"
+                    >
+                        <ui-input-text
+                            class="w-full"
+                            [nzModel]="input.value"
+                            [nzPlaceHolder]="input.title"
+                            (nzCallback)="input.value = $event"
+                        ></ui-input-text>
+
+                        <button
+                            nz-button
+                            type="submit"
+                            class="!hidden"
+                        ></button>
+                    </form>
+                </ng-container>
+
+                <ng-container *ngIf="input.type === 'number'">
+                    <ui-input-number
+                        class="w-full"
+                        [nzPlaceHolder]="input.title"
+                        (nzCallback)="input.value = $event"
+                        (nzBlur)="onSubmit()"
+                    ></ui-input-number>
+                </ng-container>
+            </div>
+        </ng-container>
+    </nz-card>
+    <ng-template #template>
+        <button
+            nz-button
+            nzShape="circle"
+            nzSize="small"
+            class="mr-1 border-none"
+            (click)="cardToggle = !cardToggle"
+        >
+            <i
+                nz-icon
+                [nzType]="cardToggle ? 'down' : 'right'"
+            ></i>
+        </button>
+    </ng-template>
+</div>

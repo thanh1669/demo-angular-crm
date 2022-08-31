@@ -1,0 +1,95 @@
+<button
+    nzDanger
+    nz-button
+    nz-dropdown
+    class="mr-2"
+    nzSize="large"
+    nzType="primary"
+    nzTrigger="click"
+    [nzDropdownMenu]="ExportFile"
+>
+    <i
+        nz-icon
+        nzType="download"
+        class="verical"
+    ></i>
+    Xuất file
+
+    <nz-dropdown-menu
+        nzNoAnimation="true"
+        #ExportFile="nzDropdownMenu"
+    >
+        <nz-card
+            nz-menu
+            class="w-96 border-none"
+            [nzTitle]="'Danh sách file tải xuống'"
+            [nzActions]=" [tongquan, chitiet]"
+        >
+            <nz-empty
+                nzNotFoundImage="simple"
+                [nzNotFoundContent]="EmptyFile"
+                *ngIf="!nzFileList || nzFileList.length === 0"
+            >
+                <ng-template #EmptyFile>
+                    <p class="text-gray-400">Không có file được tải xuống</p>
+                </ng-template>
+            </nz-empty>
+
+            <ng-container>
+                <ul nz-list>
+                    <li
+                        nzNoFlex
+                        nz-list-item
+                        *ngFor="let item of nzFileList || []"
+                    >
+                        <ul nz-list-item-actions>
+                            <nz-list-item-action>
+                                <a
+                                    target="_blank"
+                                    [href]="item.url"
+                                >
+                                    <i
+                                        nz-icon
+                                        nzType="download"
+                                        class="!w-5"
+                                    ></i>
+                                </a>
+                            </nz-list-item-action>
+                        </ul>
+                        <span>
+                            {{ item.name }}
+                        </span>
+                    </li>
+                </ul>
+            </ng-container>
+
+            <ng-template #tongquan>
+                <button
+                    nz-button
+                    (click)="nzCallback.emit('default')"
+                >
+                    <i
+                        nz-icon
+                        nzType="file"
+                        class="!w-5"
+                    ></i>
+                    File tổng quan
+                </button>
+            </ng-template>
+
+            <ng-template #chitiet>
+                <button
+                    nz-button
+                    (click)="nzCallback.emit('full')"
+                >
+                    <i
+                        nz-icon
+                        class="!w-5"
+                        nzType="file-text"
+                    ></i>
+                    File chi tiết
+                </button>
+            </ng-template>
+        </nz-card>
+    </nz-dropdown-menu>
+</button>

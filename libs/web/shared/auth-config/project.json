@@ -1,0 +1,27 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/web/shared/auth-config/src",
+    "prefix": "app-crm",
+    "targets": {
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": [
+                "coverage/libs/web/shared/auth-config"
+            ],
+            "options": {
+                "jestConfig": "libs/web/shared/auth-config/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/web/shared/auth-config/**/*.ts",
+                    "libs/web/shared/auth-config/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": []
+}

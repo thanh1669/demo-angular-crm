@@ -1,0 +1,27 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/web/auth/data-access/stores/src",
+    "prefix": "app-crm",
+    "targets": {
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": [
+                "coverage/libs/web/auth/data-access/stores"
+            ],
+            "options": {
+                "jestConfig": "libs/web/auth/data-access/stores/jest.config.ts",
+                "passWithNoTests": true
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/web/auth/data-access/stores/**/*.ts",
+                    "libs/web/auth/data-access/stores/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": []
+}

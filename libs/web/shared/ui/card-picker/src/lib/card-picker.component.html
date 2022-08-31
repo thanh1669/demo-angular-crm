@@ -1,0 +1,49 @@
+<div class="section mb-5">
+    <nz-card
+        class="w-full"
+        [nzSize]="cardSize"
+        [nzTitle]="cardTitle"
+        [nzExtra]="cardTemplate"
+        nzHoverable
+    >
+        <div class='py-2 w-full'>
+            <ng-template #dateRange>
+                <div>
+                    <p>Content</p>
+                    <p>Content</p>
+                </div>
+            </ng-template>
+            <button
+                nz-button
+                nz-popover
+                class="w-full text-left"
+                nzPopoverTitle="Title"
+                nzPopoverTrigger="click"
+                nzPopoverPlacement="right"
+                [nzPopoverContent]="dateRange"
+            >
+                Toàn thời gian
+            </button>
+        </div>
+        <nz-range-picker
+            [nzMode]="nzMode"
+            [(ngModel)]="nzModel"
+            [nzPlaceHolder]="nzTitle"
+            (ngModelChange)="nzCallback.emit($event)"
+        ></nz-range-picker>
+    </nz-card>
+    <ng-template #cardTemplate>
+        <button
+            nz-button
+            nzShape="circle"
+            nzSize="small"
+            class="mr-1 border-none"
+            (click)="cardToggle = !cardToggle"
+        >
+            <i
+                nz-icon
+                [nzType]="cardToggle ? 'down' : 'right'"
+            ></i>
+        </button>
+    </ng-template>
+</div>

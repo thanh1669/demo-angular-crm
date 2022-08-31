@@ -1,0 +1,49 @@
+<button
+    nzDanger
+    nz-button
+    nz-dropdown
+    class="mr-2"
+    nzSize="large"
+    nzType="primary"
+    nzTrigger="click"
+    [nzDropdownMenu]="ExportFile"
+>
+    <i
+        nz-icon
+        nzType="download"
+        class="verical"
+    ></i>
+    Nhập file
+
+    <nz-dropdown-menu
+        nzNoAnimation="true"
+        #ExportFile="nzDropdownMenu"
+    >
+        <nz-card
+            nz-menu
+            class="w-96 border-none"
+            [nzTitle]="nzTitle"
+            [nzActions]="[submit]"
+        >
+            <nz-upload
+                nzType="drag"
+                (nzChange)="fileChange($event)"
+            >
+                <p class="ant-upload-text">
+                    Chọn file của bạn
+                </p>
+            </nz-upload>
+
+            <ng-template #submit>
+                <button nz-button>
+                    <i
+                        nz-icon
+                        nzType="send"
+                        class="!w-5"
+                    ></i>
+                    Thực hiện
+                </button>
+            </ng-template>
+        </nz-card>
+    </nz-dropdown-menu>
+</button>

@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/web/shared/ui/button-upload/src",
+  "prefix": "ui",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/shared/ui/button-upload"],
+      "options": {
+        "jestConfig": "libs/web/shared/ui/button-upload/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/shared/ui/button-upload/**/*.ts",
+          "libs/web/shared/ui/button-upload/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

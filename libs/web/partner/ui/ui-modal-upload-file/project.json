@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/web/partner/ui/ui-modal-upload-file/src",
+  "prefix": "ui",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/partner/ui/ui-modal-upload-file"],
+      "options": {
+        "jestConfig": "libs/web/partner/ui/ui-modal-upload-file/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/partner/ui/ui-modal-upload-file/**/*.ts",
+          "libs/web/partner/ui/ui-modal-upload-file/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

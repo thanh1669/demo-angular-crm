@@ -1,0 +1,213 @@
+<main class="bg-gray-50 overflow-y-auto h-screen pb-12">
+    <ng-container *ngIf="vm$ | async as vm">
+        <header class="bg-white shadow">
+            <div class="max-w-full 5xl:max-w-8xl mx-auto py-4 px-8 sm:px-8 5xl:px-8">
+                <div class="grid grid-cols-8 gap-4">
+                    <h1 class="text-3xl font-bold text-gray-900 col-start-1 col-end-3">
+                        User List
+                    </h1>
+                    <div class="col-start-3 col-end-9 text-right">
+                        <button
+                            nzDanger
+                            nz-button
+                            nz-dropdown
+                            [nzDropdownMenu]="addon"
+                            *ngIf="vm.rowSelectedKeys && vm.rowSelectedKeys.size"
+                            nzPlacement="bottomLeft"
+                            nzTrigger="click"
+                            nzSize="large"
+                            class="mr-2"
+                        >
+                            <i
+                                nz-icon
+                                nzType="more"
+                            ></i>
+                            <span>
+                                Thao tác
+                            </span>
+                            <nz-dropdown-menu #addon="nzDropdownMenu">
+                                <ul nz-menu>
+                                    <li nz-menu-item>Xoá</li>
+                                    <li nz-menu-item>Ngừng hoạt động</li>
+                                </ul>
+                            </nz-dropdown-menu>
+                        </button>
+
+                        <button
+                            nzDanger
+                            nz-button
+                            nz-dropdown
+                            class="mr-2"
+                            nzSize="large"
+                            nzType="primary"
+                            (click)="setCustomerCreateVisibility()"
+                            *ngIf="vm.pageAuthorize['create']"
+                        >
+                            <i
+                                nz-icon
+                                nzType="plus"
+                                class="verical"
+                            ></i>
+                            Thêm mới
+                        </button>
+
+                        <ui-dropdown-upload
+                            *ngIf="vm.pageAuthorize['upload']"
+                            [nzTitle]="'Nhập dữ liệu khách hàng'"
+                        >
+                            <!-- TemplateRef -->
+                        </ui-dropdown-upload>
+
+                        <ui-dropdown-download
+                            (nzCallback)="download()"
+                            [nzFileList]="vm.downloadFiles"
+                            *ngIf="vm.pageAuthorize['download']"
+                        >
+                            <!-- TemplateRef -->
+                        </ui-dropdown-download>
+
+                        <ui-dropdown-thead
+                            [nzCollums]="vm.collums"
+                            [nzKey]="ConstantsType.CUSTOMER_COLLUMS"
+                            (nzCallback)="setCollumVisibility($event)"
+                        >
+                            <!-- TemplateRef -->
+                        </ui-dropdown-thead>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="w-full 5xl:max-w-8xl mx-auto sm:px-8 5xl:px-8">
+            <!-- Replace content -->
+            <div class="px-6 py-4 sm:px-0 ">
+                <div
+                    class="grid grid-cols-12 gap-4"
+                    *ngIf="vm.pageAuthorize['view']"
+                >
+                    <div class="col-start-1  max-sm:hidden 2xl:col-end-3 col-end-4 h-full ...">
+                        <ui-card-input
+                            [nzData]="[
+                                {key: 'keyword', type: 'text', title: 'Theo mã,tên, điện thoại'},
+                                {key: 'email',type: 'text', title: 'Theo email'},
+                                {key: 'note',type: 'text', title: 'Theo ghi chú'},
+                            ]"
+                            [cardSize]="'small'"
+                            [cardTitle]="'Tìm kiếm'"
+                            (nzCallback)="setFilter($event)"
+                        >
+                        </ui-card-input>
+
+                        <ui-card-select
+                            [nzData]="vm.groups"
+                            [cardSize]="'small'"
+                            [cardTitle]="'Nhóm khách hàng'"
+                            [nzPlaceHolder]="'Tất cả nhóm'"
+                            (nzCallback)="setFilter({ groups: $event })"
+                        ></ui-card-select>
+
+                        <ui-card-picker
+                            [cardSize]="'small'"
+                            [cardTitle]="'Ngày tạo'"
+                            (nzCallback)="setFilter({ min_created_at: $event[0], max_created_at: $event[1] })"
+                        ></ui-card-picker>
+
+                        <ui-card-select
+                            [nzData]="vm.staffs"
+                            [cardSize]="'small'"
+                            [cardTitle]="'Người tạo'"
+                            [nzPlaceHolder]="'Chọn người tạo'"
+                            (nzCallback)="setFilter({ creaters: $event })"
+                        ></ui-card-select>
+
+                        <ui-card-picker
+                            [cardSize]="'small'"
+                            [cardTitle]="'Sinh nhật'"
+                            (nzCallback)="setFilter({ min_birthday: $event[0], max_birthday: $event[1] })"
+                        ></ui-card-picker>
+
+                        <ui-card-picker
+                            [cardSize]="'small'"
+                            [cardTitle]="'Ngày giao dịch cuối'"
+                            (nzCallback)="setFilter({ min_pruchase_at: $event[0], max_pruchase_at: $event[1] })"
+                        ></ui-card-picker>
+
+                        <ui-card-input
+                            [nzData]="[
+                                {key: 'min_total_invoice_price', type: 'number', title: 'Từ:'},
+                                {key: 'max_total_invoice_price', type: 'number', title: 'Tới:'},
+                            ]"
+                            [cardSize]="'small'"
+                            [cardTitle]="'Tổng bán'"
+                            (nzCallback)="setFilter($event)"
+                        >
+                        </ui-card-input>
+
+                        <ui-card-input
+                            [nzData]="[
+                                {key: 'min_total_debt', type: 'number', title: 'Từ:'},
+                                {key: 'max_total_debt', type: 'number', title: 'Tới:'},
+                            ]"
+                            [cardSize]="'small'"
+                            [cardTitle]="'Nợ hiện tại'"
+                            (nzCallback)="setFilter($event)"
+                        >
+                        </ui-card-input>
+
+                        <ui-card-radio
+                            [cardSize]="'small'"
+                            [cardTitle]="'Loại khách'"
+                            [nzData]="vm.types"
+                            [nzModel]="vm.pageFilter && vm.pageFilter['types']"
+                            (nzCallback)="setFilter({ types: $event })"
+                        ></ui-card-radio>
+
+                        <ui-card-radio
+                            [cardSize]="'small'"
+                            [cardTitle]="'Giới tính'"
+                            [nzData]="vm.genders"
+                            [nzModel]="vm.pageFilter && vm.pageFilter['genders']"
+                            (nzCallback)="setFilter({ genders: $event })"
+                        ></ui-card-radio>
+
+                        <ui-card-radio
+                            [cardSize]="'small'"
+                            [cardTitle]="'Trạng thái'"
+                            [nzData]="vm.statuses"
+                            [nzModel]="vm.pageFilter && vm.pageFilter['statuses']"
+                            (nzCallback)="setFilter({ statuses: $event })"
+                        ></ui-card-radio>
+                    </div>
+                    <div class="col-start-4 max-sm:col-start-1 2xl:col-start-3 col-end-13 ...">
+                        <div class="h-full min-h-fit">
+                            <ui-card-table
+                                [nzScroll]="true"
+                                [nzHead]="vm.collums"
+                                [nzData]="vm.customers"
+                                [expandTemplate]="form"
+                                [nzTotal]="vm.pageFilter && vm.pageFilter['pageCount']"
+                                [nzPageSize]="vm.pageFilter && vm.pageFilter['limit']"
+                                [nzLoading]="vm.pageLoading['view']"
+                                [nzSelectedKeys]="vm.rowSelectedKeys"
+                                (nzSizeChange)="setFilter({ limit: $event })"
+                                (nzIndexChange)="setFilter({ skip: $event })"
+                                (nzSelectedChange)="setListButtonAddOnVisibility($event)"
+                            >
+                                <ng-template #form>
+
+                                </ng-template>
+                            </ui-card-table>
+                        </div>
+                    </div>
+                </div>
+
+                <nz-empty
+                    *ngIf="!vm.pageAuthorize['view']"
+                    nzNotFoundContent="Xin lỗi, tài khoản của bạn hiện tại không được thao tác vào tính năng này !"
+                >
+                    <!-- Template -->
+                </nz-empty>
+            </div>
+            <!-- /End replace -->
+        </div>
+    </ng-container>
+</main>
